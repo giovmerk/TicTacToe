@@ -10,7 +10,7 @@ def next_turn(row, column):
 
             if check_winner() is False:
                 player = players[1]
-                label.config(text=(players[1]+" turn"))
+                label.config(text=("Tocca a "+players[1]))
             elif check_winner() is True:
                 label.config(text=(players[0]+" Vince!"))
             elif check_winner() == "Pari":
@@ -20,7 +20,7 @@ def next_turn(row, column):
 
             if check_winner() is False:
                 player = players[0]
-                label.config(text=(players[0] + " turn"))
+                label.config(text="Tocca a "+(players[0]))
             elif check_winner() is True:
                 label.config(text=(players[1] + " Vince!"))
             elif check_winner() == "Pari":
@@ -60,7 +60,15 @@ def empty_spaces():
     else:
         return True
 def new_game():
-    pass
+    global player
+
+    player = random.choice(players)
+
+    label.config(text="Tocca a "+player)
+
+    for row in range(3):
+        for column in range(3):
+            buttons[row][column].config(text="")
 
 window = Tk()
 window.title("Tic-Tac-Toe")
@@ -70,7 +78,7 @@ buttons = [[0,0,0],
            [0,0,0],
            [0,0,0]]
 
-label = Label(text= player + " turn", font=('consolas', 40))
+label = Label(text= "Tocca a "+player, font=('consolas', 40))
 label.pack(side="top")
 
 reset_button = Button(text="restart", font=('consolas', 20), command=new_game)
